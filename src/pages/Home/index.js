@@ -15,7 +15,9 @@ import { useData } from "../../contexts/DataContext";
 const Page = () => {
   /* Correction affichage image de la dernière prestation */
   const { data } = useData();
-  const lastEvent = data?.events?.[data.events.length - 1] || null;
+  /* Correction affichage dernier évènement via date */
+  const sortedEvents = [...(data?.events || [])].sort((a, b) => new Date(b.date) - new Date(a.date));
+  const lastEvent = sortedEvents[0] || null;
   return <>
     <header>
       <Menu />

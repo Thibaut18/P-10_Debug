@@ -11,19 +11,15 @@ const Slider = () => {
     new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
   );
   const nextCard = () => {
-      setTimeout(() => {
-      setIndex((index + 1) % (byDateDesc?.length || 0));
+    const timer = setTimeout(() => {
+      setIndex((currentIndex) => (currentIndex + 1) % (byDateDesc?.length || 1));
     }, 5000);
+    return timer;
   };
-    /* setTimeout(
-      () => setIndex(index < byDateDesc.length ? index + 1 : 0),
-      5000
-    );
-  }; */
   
   useEffect(() => {
     const timer = nextCard();
-    return () => clearTimeout(timer); // nettoyage du timeout
+    return () => clearTimeout(timer);
   }, [index, byDateDesc]);
 
   /* Modifs des keys */
